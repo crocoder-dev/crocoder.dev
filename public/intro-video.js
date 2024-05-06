@@ -1,19 +1,17 @@
 export default function start() {
-  document.addEventListener('DOMContentLoaded', () => {
-    preload();
+  preload();
 
-    const initialScrollPosition = window.scrollY;
+  const initialScrollPosition = window.scrollY;
 
-    function handleScroll() {
-      let scrollPosition = window.scrollY;
-      if (Math.abs(initialScrollPosition - scrollPosition) > 100) {
-        setupIntroVideo();
-        window.removeEventListener('scroll', handleScroll);
-      }
+  function handleScroll() {
+    let scrollPosition = window.scrollY;
+    if (Math.abs(initialScrollPosition - scrollPosition) > 100) {
+      setupIntroVideo();
+      window.removeEventListener('scroll', handleScroll);
     }
+  }
 
-    window.addEventListener('scroll', handleScroll);
-  });
+  window.addEventListener('scroll', handleScroll);
 
 }
 
