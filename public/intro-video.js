@@ -135,25 +135,6 @@ function setupIntroVideo() {
     }, 500);
   }
 
-  /*
-  <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2">
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    class="mr-2 h-4 w-4"
-  >
-    <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path>
-  </svg>
-  Message Me
-</button>
-*/
   const cta = document.createElement('button');
   cta.style.display = 'inline-flex';
   cta.style.paddingTop = '0.5rem';
@@ -174,7 +155,6 @@ function setupIntroVideo() {
   cta.textContent = 'Message Me';
   cta.style.backgroundColor = '#000';
   cta.style.color = '#FFF';
-  console.log(cta.offsetWidth);
   cta.style.left = '70px';
   cta.style.width = '130px';
 
