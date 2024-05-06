@@ -1,5 +1,43 @@
-export default function setupIntroVideo() {
-  console.log('Setting up intro video');
+export default function start() {
+  document.addEventListener('DOMContentLoaded', () => {
+    preload();
+
+    const initialScrollPosition = window.scrollY;
+
+    function handleScroll() {
+      let scrollPosition = window.scrollY;
+      if (Math.abs(initialScrollPosition - scrollPosition) > 100) {
+        setupIntroVideo();
+        window.removeEventListener('scroll', handleScroll);
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll);
+  });
+
+}
+
+function preload() {
+  const container = document.querySelector('#intro-video');
+
+  const video = document.createElement('video');
+
+  video.id = 'intro-video-player';
+  video.style.display = 'none';
+  video.style.width = '100%';
+  video.style.height = '100%';
+  video.style.margin = '0 auto';
+  video.style.borderRadius = '8px';
+  video.style.objectFit = 'cover';
+  video.muted = true;
+  video.loop = true;
+  video.draggable = false;
+  video.src = 'https://cdn.dribbble.com/userupload/92566/file/original-53ad0460a2ad35860f2859f174d7a6f4.mov';
+
+  container.appendChild(video);
+}
+
+function setupIntroVideo() {
   const container = document.querySelector('#intro-video');
 
   const card = document.createElement('div');
@@ -14,7 +52,6 @@ export default function setupIntroVideo() {
   card.style.height = '284px';
   card.style.transition = 'all .25s ease-in-out';
   card.style.borderRadius = '16px';
-  card.style.opacity = '0';
   card.style.background = '#fff';
   card.style.boxShadow = '0 20px 48px rgba(0,0,0,.1)';
   card.style.cursor = 'pointer';
@@ -23,14 +60,15 @@ export default function setupIntroVideo() {
 
   bubble.id = 'bubble-text';
   bubble.style.position = 'absolute';
-  bubble.style.top = '-40px';
-  bubble.style.left = '20px';
+  bubble.style.top = '30px';
+  bubble.style.left = '-40px';
   bubble.style.width = 'auto';
   bubble.style.minWidth = '60px';
   bubble.style.padding = '8px';
   bubble.style.background = 'white';
   bubble.style.border = '2px solid #007BFF';
   bubble.style.borderRadius = '10px';
+  bubble.style.borderBottomRightRadius = '2px';
   bubble.style.textAlign = 'center';
   bubble.style.boxShadow = '0px 8px 16px 0px rgba(0,0,0,0.2)';
 
@@ -43,18 +81,9 @@ export default function setupIntroVideo() {
   videoWrapper.style.position = 'relative';
   videoWrapper.style.borderRadius = '8px';
 
-  const video = document.createElement('video');
+  const video = document.querySelector('#intro-video-player');
 
   video.style.display = 'block';
-  video.style.width = '100%';
-  video.style.height = '100%';
-  video.style.margin = '0 auto';
-  video.style.borderRadius = '8px';
-  video.style.objectFit = 'cover';
-  video.muted = true;
-  video.loop = true;
-  video.draggable = false;
-  video.src = 'https://cdn.dribbble.com/userupload/92566/file/original-53ad0460a2ad35860f2859f174d7a6f4.mov';
 
   const progressBar = document.createElement('progress');
   progressBar.id = 'intro-video-progress-bar';
@@ -91,15 +120,15 @@ export default function setupIntroVideo() {
   styleSheet.innerText = '#intro-video-progress-bar::-webkit-progress-value {background-color: #007BFF;}'
     + '#intro-video-progress-bar::-webkit-progress-bar {background-color: transparent;border-bottom-right-radius: 8px;border-bottom-left-radius: 8px;}'
     + '#intro-video-progress-bar::-moz-progress-value {background-color: #007BFF;}'
-    + '#intro-video-progress-bar::-moz-progress-bar {background-color: transparent;border-bottom-right-radius: 8px;border-bottom-left-radius: 8px;}';
-  container.appendChild(styleSheet);
+    + '#intro-video-progress-bar::-moz-progress-bar {background-color: transparent;border-bottom-right-radius: 8px;border-bottom-left-radius: 8px;}'
+    + '@keyframes bounce-fade { 0% { transform: scale(0.5); opacity: 0; } 50% { transform: scale(1.2); } 100% { transform: scale(1); opacity: 1; }';
+  document.head.appendChild(styleSheet);
 
 
   video.addEventListener('timeupdate', function() {
     const percentage = (video.currentTime / video.duration) * 100;
     progressBar.value = percentage;
   });
-
 
   button.onclick = () => {
     card.style.opacity = 0;
@@ -122,11 +151,5 @@ export default function setupIntroVideo() {
   card.appendChild(button);
   card.appendChild(bubble);
   container.appendChild(card);
-
-  setTimeout(() => {
-    card.style.opacity = 1;
-    video.play();
-  }, 1000);
+  video.play();
 }
-
-
