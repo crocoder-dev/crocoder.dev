@@ -21,12 +21,8 @@ function preload() {
   const video = document.createElement('video');
 
   video.id = 'intro-video-player';
-  video.style.display = 'none';
-  video.style.width = '100%';
-  video.style.height = '100%';
-  video.style.margin = '0 auto';
-  video.style.borderRadius = '8px';
-  video.style.objectFit = 'cover';
+  video.classList.add('iv-player');
+
   video.muted = true;
   video.loop = true;
   video.draggable = false;
@@ -39,89 +35,30 @@ function setupIntroVideo() {
   const container = document.querySelector('#intro-video');
 
   const card = document.createElement('div');
-
-  card.style.animation = 'bounce-fade .4s';
-  card.style.position = 'fixed';
-  card.style.zIndex = '10';
-  card.style.right = '16px';
-  card.style.bottom = '16px';
-  card.style.boxSizing = 'border-box';
-  card.style.width = '160px';
-  card.style.height = '284px';
-  card.style.transition = 'all .25s ease-in-out';
-  card.style.borderRadius = '16px';
-  card.style.background = '#fff';
-  card.style.boxShadow = '0 20px 48px rgba(0,0,0,.1)';
-  card.style.cursor = 'pointer';
+  card.classList.add('iv-card');
 
   const bubble = document.createElement('div');
 
   bubble.id = 'bubble-text';
-  bubble.style.position = 'absolute';
-  bubble.style.top = '30px';
-  bubble.style.left = '-40px';
-  bubble.style.width = 'auto';
-  bubble.style.minWidth = '60px';
-  bubble.style.padding = '8px';
-  bubble.style.background = 'white';
-  bubble.style.border = '2px solid #007BFF';
-  bubble.style.borderRadius = '10px';
-  bubble.style.borderBottomRightRadius = '2px';
-  bubble.style.textAlign = 'center';
-  bubble.style.boxShadow = '0px 8px 16px 0px rgba(0,0,0,0.2)';
+  bubble.classList.add('iv-bubble');
 
   bubble.textContent = 'Hello!';
 
   const videoWrapper = document.createElement('div');
-
-  videoWrapper.style.width = '100%';
-  videoWrapper.style.height = '100%';
-  videoWrapper.style.position = 'relative';
-  videoWrapper.style.borderRadius = '8px';
+  videoWrapper.classList.add('iv-player-wrapper');
 
   const video = document.querySelector('#intro-video-player');
-
   video.style.display = 'block';
 
   const progressBar = document.createElement('progress');
-  progressBar.id = 'intro-video-progress-bar';
+  progressBar.id = 'intro-video-progressbar';
+  progressBar.classList.add('iv-progressbar');
   progressBar.value = 0;
   progressBar.max = 100;
-  progressBar.style.height = '8px';
-  progressBar.style.width = '160px';
-  progressBar.style.position = 'absolute';
-  progressBar.style.bottom = '0px';
-  progressBar.style.borderBottomLeftRadius = '8px';
-  progressBar.style.borderBottomRightRadius = '8px';
-  progressBar.style.overflow = 'hidden';
-
 
   const button = document.createElement('button');
-  button.style.position = 'absolute';
-  button.style.top = '-16px';
-  button.style.right = '-16px';
-  button.style.background = 'rgba(0, 0, 0, 1)';
-  button.style.color = 'white';
-  button.style.border = 'none';
-  button.style.borderRadius = '50%';
-  button.style.width = '32px';
-  button.style.height = '32px';
-  button.style.display = 'flex';
-  button.style.alignItems = 'center';
-  button.style.justifyContent = 'center';
-  button.style.fontSize = '42px';
-  button.style.cursor = 'pointer';
+  button.classList.add('iv-close-button');
   button.innerHTML = '&times;';
-  button.style.paddingBottom = '2px';
-
-  const styleSheet = document.createElement('style');
-  styleSheet.innerText = '#intro-video-progress-bar::-webkit-progress-value {background-color: #007BFF;}'
-    + '#intro-video-progress-bar::-webkit-progress-bar {background-color: transparent;border-bottom-right-radius: 8px;border-bottom-left-radius: 8px;}'
-    + '#intro-video-progress-bar::-moz-progress-value {background-color: #007BFF;}'
-    + '#intro-video-progress-bar::-moz-progress-bar {background-color: transparent;border-bottom-right-radius: 8px;border-bottom-left-radius: 8px;}'
-    + '@keyframes bounce-fade { 0% { transform: scale(0.5); opacity: 0; } 50% { transform: scale(1.2); } 100% { transform: scale(1); opacity: 1; }';
-  document.head.appendChild(styleSheet);
-
 
   video.addEventListener('timeupdate', function() {
     const percentage = (video.currentTime / video.duration) * 100;
@@ -136,27 +73,8 @@ function setupIntroVideo() {
   }
 
   const cta = document.createElement('button');
-  cta.style.display = 'inline-flex';
-  cta.style.paddingTop = '0.5rem';
-  cta.style.paddingBottom = '0.5rem';
-  cta.style.paddingLeft = '1rem';
-  cta.style.paddingRight = '1rem';
-  cta.style.transitionProperty = 'background-color, border-color, color, fill, stroke';
-  cta.style.fontSize = '0.875rem';
-  cta.style.lineHeight = '1.25rem';
-  cta.style.fontWeight = '500';
-  cta.style.whiteSpace = 'nowrap';
-  cta.style.justifyContent = 'center';
-  cta.style.alignItems = 'center';
-  cta.style.height = '2.5rem';
-  cta.style.borderRadius = '0.375rem';
-  cta.style.position = 'absolute';
-  cta.style.bottom = '2rem';
+  cta.classList.add('iv-cta-button');
   cta.textContent = 'Message Me';
-  cta.style.backgroundColor = '#000';
-  cta.style.color = '#FFF';
-  cta.style.left = '70px';
-  cta.style.width = '130px';
 
   videoWrapper.onclick = () => {
     card.style.height = '480px';
